@@ -8,6 +8,9 @@ This repository contains my report and implementation for my Honors MATH 441 cla
 ## Cyclic Coordinate Descent
 https://github.com/user-attachments/assets/89317682-64c4-4b02-8c31-c0a2f38c6eb5
 
+## Jacobian Transpose
+https://github.com/user-attachments/assets/0af39a8f-e61d-49c1-8b62-5ab88edc9485
+
 # Section 3 - Analysis
 
 # Section 4 - Conclusion
