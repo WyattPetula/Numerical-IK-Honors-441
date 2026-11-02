@@ -751,6 +751,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c42a3fe25c272e84482478dccb8073c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Draggable
+  drag_plane_enum: 0
+  mainCamera: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,6 +1279,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1798788429}
   - component: {fileID: 1798788430}
+  - component: {fileID: 1798788431}
   m_Layer: 0
   m_Name: IK-Solvers
   m_TagString: Untagged
@@ -1306,7 +1309,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798788428}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f406d9ad6cbcbf45b98a19a4a9811fd, type: 3}
   m_Name: 
@@ -1316,6 +1319,18 @@ MonoBehaviour:
   end_effector_t: {fileID: 345424515}
   joint_objs: []
   joint_rjs: []
+--- !u!114 &1798788431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798788428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5766eb46b60e4149a614c478b326bec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &1963874729
 GameObject:
   m_ObjectHideFlags: 0
