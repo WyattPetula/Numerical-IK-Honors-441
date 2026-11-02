@@ -23,4 +23,9 @@ public class RevoluteJoint : MonoBehaviour
         currentAngle = Mathf.Clamp(newAngle, minAngle, maxAngle);
         transform.localRotation = startRotQ * Quaternion.AngleAxis(currentAngle, localZAxis.normalized);
     }
+    public void AddAngle(float addAngle)
+    {
+        currentAngle = Mathf.Clamp(currentAngle + addAngle, minAngle, maxAngle);
+        transform.localRotation = startRotQ * Quaternion.AngleAxis(currentAngle, localZAxis.normalized);
+    }
 }

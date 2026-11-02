@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -37,7 +36,7 @@ public class CyclicCoordinateDescent : MonoBehaviour
             Vector3 joint_target_v = (target_t.position - joint_obj.transform.position).normalized;
 
             float z_angle = Vector3.SignedAngle(joint_effector_v, joint_target_v, joint_rj.localZAxis);
-            joint_rj.SetAngle(joint_rj.currentAngle + z_angle);
+            joint_rj.AddAngle(z_angle);
         }
     }
 }

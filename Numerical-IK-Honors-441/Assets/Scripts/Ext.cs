@@ -5,29 +5,6 @@ using System.Linq;
 public static class Ext
 {
     // =============================================================================
-    // MATRICES
-    // =============================================================================
-
-    /// <summary>
-    /// Create a (k x n) matrix.
-    /// </summary>
-    /// <param name="k"></param>
-    /// <param name="n"></param>
-    /// <returns></returns>
-    public static float[][] CreateMatrix(int k, int n)
-    {
-        float[][] matrix = new float[k][];
-        for(int i = 0; i < k; i++)
-        {
-            matrix[i] = new float[n];
-        }
-
-        return matrix;
-    }
-
-
-
-    // =============================================================================
     // NESTING & CHILDREN
     // =============================================================================
 

@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 345424516}
   m_Layer: 0
   m_Name: End-Effector
-  m_TagString: Untagged
+  m_TagString: End-Effector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -641,7 +641,7 @@ GameObject:
   - component: {fileID: 669605380}
   m_Layer: 0
   m_Name: Target
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1331,6 +1331,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5766eb46b60e4149a614c478b326bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  target_t: {fileID: 669605379}
+  end_effector_t: {fileID: 345424515}
+  ee_objs:
+  - {fileID: 345424514}
+  target_objs:
+  - {fileID: 669605375}
+  joint_objs:
+  - {fileID: 1963874729}
+  - {fileID: 96227244}
+  - {fileID: 1648114621}
+  joint_rjs: []
 --- !u!1 &1963874729
 GameObject:
   m_ObjectHideFlags: 0
