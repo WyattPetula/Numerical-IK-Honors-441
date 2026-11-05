@@ -4,7 +4,12 @@ This repository contains my report and implementation for my Honors MATH 441 cla
 # Section 1 - Introduction
 
 ## Motivation
+
+Recently, I have been playing a video game titled Rain World. In Rain World, a nomadic slug-cat (the player) must learn to navigate an alien ecosystem while being prey for the local wildlife. One of the most interesting parts of Rain World is its complex procedural animation, which employs inverse kinematics to make its creatures behave more lifelike:
+
 ![Demo GIF](https://i.imgur.com/osZj8BC.gif)
+
+*Inverse kinematics enables the humble slugcat to walk, climb, and crawl realistically in a variety of environments—a challenge with traditional methods, such as keyframe animation.*
 
 # Section 2 - Implementations
 
