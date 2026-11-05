@@ -10,7 +10,7 @@ One of my favorite video games is Rain World. In Rain World, you play as a nomad
 
 *Inverse kinematics enables the slugcat to climb, walk, and crawl realistically in a variety of environments—a feat difficult to accomplish using traditional animation methods.*
 
-A common procedural animation technique is inverse kinematics, which calculates the joint angles and positions necessary for the end of a kinematic chain (e.g., a hand) to reach a target. As a hobbyist game developer, I want to make a game like Rain World for my next project; however, I have no experience with procedural animation. Fortunately, several inverse kinematics methods are rooted in matrix algebra, which makes them a great topic for my MATH 441 honors project.
+A common procedural animation technique is inverse kinematics, which calculates the joint angles and positions necessary for the end of a kinematic chain (e.g., a hand) to reach a target. As a hobbyist game developer, I want to make a game like Rain World for my next project; however, I have no experience with procedural animation. Fortunately, several inverse kinematics methods are rooted in matrix algebra, which makes them a great topic for a MATH 441 honors project.
 
 ## Project Goals
 
