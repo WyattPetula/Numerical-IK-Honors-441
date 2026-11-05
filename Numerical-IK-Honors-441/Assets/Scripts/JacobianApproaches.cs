@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using MathNet.Numerics;
 using System;
 
-public class JacobianTranspose : MonoBehaviour
+public class JacobianApproaches : MonoBehaviour
 {
     public enum JacobianMethod
     {
