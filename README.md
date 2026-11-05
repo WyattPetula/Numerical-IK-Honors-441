@@ -3,6 +3,9 @@ This repository contains my report and implementation for my Honors MATH 441 cla
 
 # Section 1 - Introduction
 
+## Motivation
+![Demo GIF](https://i.imgur.com/osZj8BC.gif)
+
 # Section 2 - Implementations
 
 ## Cyclic Coordinate Descent
@@ -10,6 +13,12 @@ https://github.com/user-attachments/assets/89317682-64c4-4b02-8c31-c0a2f38c6eb5
 
 ## Jacobian Transpose
 https://github.com/user-attachments/assets/0af39a8f-e61d-49c1-8b62-5ab88edc9485
+
+## Jacobian Pseudoinverse
+https://github.com/user-attachments/assets/c29a9c8c-39de-436d-a199-b59f26d76db6
+
+## (Jacobian) Dampened Least Squares
+https://github.com/user-attachments/assets/28c8d139-9640-43ef-9f1f-8fe9aa660d2a
 
 # Section 3 - Analysis
 
