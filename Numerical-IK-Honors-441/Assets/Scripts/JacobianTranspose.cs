@@ -2,11 +2,21 @@ using UnityEngine;
 using MathNet.Numerics.LinearAlgebra;
 using System.Collections.Generic;
 using MathNet.Numerics;
+using System;
 
 public class JacobianTranspose : MonoBehaviour
 {
+    public enum JacobianMethod
+    {
+        Transpose,
+        Pseudoinverse,
+        DampenedLeastSquares
+    }
+
     public Transform target_t;
     public Transform end_effector_t;
+
+    [SerializeField] private JacobianMethod jacobian_method;
     [SerializeField] private List<GameObject> ee_objs; // Set in editor
     [SerializeField] private List<GameObject> target_objs; // Set in editor
     [SerializeField] private List<GameObject> joint_objs; // Set in editor
@@ -16,13 +26,17 @@ public class JacobianTranspose : MonoBehaviour
     private MatrixBuilder<float> M = Matrix<float>.Build;
     private VectorBuilder<float> V = Vector<float>.Build;
     private Matrix<float> J; // Jacobian matrix
+    private Matrix<float> JPS; // Jacobian Pseudoinverse
+    private Matrix<float> I; // Identity
     private Vector<float> t; // Target positions
     private Vector<float> s; // End effector positions
     private Vector<float> e; // Error between targets and end effectors
     private Vector<float> da; // Delta joint angles
 
     // Scalars
-    private float alpha;
+    private float alpha_tr;
+    [SerializeField] private float alpha_ps = 0.1f;
+    [SerializeField] private float lambda = 0.1f;
 
     void Start()
     {
@@ -40,6 +54,7 @@ public class JacobianTranspose : MonoBehaviour
         }
 
         J = M.Dense(3 * ee_objs.Count, joint_objs.Count);
+        I = M.DenseIdentity(J.RowCount);
         e = V.Dense(3 * ee_objs.Count);
         s = V.Dense(3 * ee_objs.Count);
         t = V.Dense(3 * ee_objs.Count);
@@ -50,8 +65,22 @@ public class JacobianTranspose : MonoBehaviour
     {
         UpdateVectors();
         UpdateJacobian();
-        CalculateAlpha();
-        UpdateDeltaAngles();
+
+        if(jacobian_method == JacobianMethod.Transpose)
+        {
+            CalculateAlpha();
+            UpdateDeltaAnglesTR();
+        }
+        else if(jacobian_method == JacobianMethod.Pseudoinverse)
+        {
+            CalculateConugateTranspose();
+            UpdateDeltaAnglesPS();
+        }
+        else
+        {
+            UpdateDeltaAnglesDLS();
+        }
+
         ApplyDeltaAngles();
     }
 
@@ -115,14 +144,9 @@ public class JacobianTranspose : MonoBehaviour
         float denominator = JJTe.DotProduct(JJTe);
 
         if(denominator.AlmostEqual(0))
-            alpha = 0;
+            alpha_tr = 0;
         else
-            alpha = numerator / denominator;
-    }
-
-    private void UpdateDeltaAngles()
-    {
-        da = alpha * J.Transpose() * e;
+            alpha_tr = numerator / denominator;
     }
 
     private void ApplyDeltaAngles()
@@ -131,5 +155,37 @@ public class JacobianTranspose : MonoBehaviour
         {
             joint_rjs[i].AddAngle(da[i] * Mathf.Rad2Deg);
         }
+    }
+
+    // =============================================================================
+    // TRANSPOSE
+    // =============================================================================
+    private void UpdateDeltaAnglesTR()
+    {
+        da = alpha_tr * J.Transpose() * e;
+    }
+
+    // =============================================================================
+    // PSEUDOINVERSE
+    // =============================================================================
+    private void CalculateConugateTranspose()
+    {
+        JPS = J.PseudoInverse();
+    }
+    private void UpdateDeltaAnglesPS()
+    {
+        da = alpha_ps * JPS * e;
+    }
+
+    // =============================================================================
+    // DAMPENED LEAST SQUARES
+    // =============================================================================
+
+    private void UpdateDeltaAnglesDLS()
+    {
+        Matrix<float> JT = J.Transpose(); 
+        Matrix<float> A = J * JT + Mathf.Pow(lambda, 2) * I;
+        Vector<float> x = A.Solve(e);
+        da = JT * x;
     }
 }
