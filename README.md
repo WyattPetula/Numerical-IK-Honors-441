@@ -1,15 +1,20 @@
-# Numerical-IK-Honors-441
-This repository contains my report and implementation for my Honors MATH 441 class project at Penn State. I have chosen to explore linear algebra-dependent methods for numerical inverse kinematics (IK).
-
-# Section 1 - Introduction
+# Honors Project for MATH 441: Matrix Algebra
 
 ## Motivation
 
-Recently, I have been playing a video game titled Rain World. In Rain World, a nomadic slug-cat (the player) must learn to navigate an alien ecosystem as a predator and prey. One of the most interesting parts of Rain World is its use of procedural animation, which draws limbs using algorithms rather than frame cycles:
+One of my favorite video games is Rain World. In Rain World, you play as a nomadic slugcat who must learn to navigate an alien ecosystem as predator and prey. One element of Rain World that captivates me is its use of procedural animation, which is animation performed using algorithms rather than keyframes. 
 
 ![Demo GIF](https://i.imgur.com/osZj8BC.gif)
 
-*Inverse kinematics enables the humble slugcat to walk, climb, and crawl realistically in a variety of environments—a challenge with traditional methods, such as keyframe animation.*
+*Inverse kinematics enables the slugcat to walk, climb, and crawl realistically in a variety of environments—a feat difficult to accomplish with traditional animation methods.*
+
+As a hobbyist game developer, I want to make a game like Rain World for my next project; however, I have no experience using procedural animation. A common procedural animation technique is inverse kinematics, which calculates the joint angles and positions necessary for the end of a kinematic chain (e.g., a hand) to reach a target. Some inverse kinematics methods rely heavily on matrix algebra, which makes them a great topic for my MATH 441 honors project.
+
+## Project Goals
+
+1. Implement four iterative inverse kinematics algorithms: Cyclic Coordinate Descent (a baseline), Jacobian Transpose, Jacobian Pseudoinverse, and Damped Least Squares
+2. Read literature on these methods to understand how and why they work
+3. Benchmark the performance and compare the visual behavior of each method
 
 # Section 2 - Implementations
 
