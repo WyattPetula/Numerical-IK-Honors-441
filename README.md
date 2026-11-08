@@ -163,7 +163,62 @@ j_{\theta} = j_{\theta} + \vec{\Delta\theta}_i
 ## (Jacobian) Damped Least Squares
 https://github.com/user-attachments/assets/28c8d139-9640-43ef-9f1f-8fe9aa660d2a
 
-# Section 3 - How Each Method Works
+**Steps:**
+
+1. Update the Jacobian
+```math
+J = \begin{bmatrix}
+\frac{\partial ee_{1x}}{\partial j\theta_1} & \frac{\partial ee_{1x}}{\partial j\theta_2} & ... & \frac{\partial ee_{1x}}{\partial j\theta_n} \\
+\frac{\partial ee_{1y}}{\partial j\theta_1} & \frac{\partial ee_{1y}}{\partial j\theta_2} & ... & \frac{\partial ee_{1y}}{\partial j\theta_n} \\
+\frac{\partial ee_{1z}}{\partial j\theta_1} & \frac{\partial ee_{1z}}{\partial j\theta_2} & ... & \frac{\partial ee_{1z}}{\partial j\theta_n} \\
+\frac{\partial ee_{2x}}{\partial j\theta_1} & \frac{\partial ee_{2x}}{\partial j\theta_2} & ... & \frac{\partial ee_{2x}}{\partial j\theta_n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial ee_{nz}}{\partial j\theta_1} & \frac{\partial ee_{nz}}{\partial j\theta_2} & ... & \frac{\partial ee_{nz}}{\partial j\theta_n} \\
+\end{bmatrix}
+```
+2. Update the end-effector position vector
+```math
+\textbf{s} = \begin{bmatrix}
+ee_{1x} \\
+ee_{1y} \\
+ee_{1z} \\
+ee_{2x} \\
+\vdots \\
+ee_{nz}
+\end{bmatrix}
+```
+
+3. Update the target position vector 
+```math
+\textbf{t} = \begin{bmatrix}
+t_{1x} \\
+t_{1y} \\
+t_{1z} \\
+t_{2x} \\
+\vdots \\
+t_{nz}
+\end{bmatrix}
+```
+
+4. Update the positional error vector
+```math
+\textbf{e} = \textbf{t} - \textbf{s}
+```
+
+5. Recalculate the per-joint correction angles (lambda is constant)
+```math
+\text{Solve }(JJ^\top + \lambda^2 I)\textbf{x} = \textbf{e},
+```
+```math
+\vec{\Delta\theta} = J^\top \textbf{x}
+```
+
+6. Apply the correction angles to each corresponding joint
+```math
+j_{\theta} = j_{\theta} + \vec{\Delta\theta}_i
+```
+
+# Section 3 - Theoretical Analysis
 
 # Section 4 - Comparative Analysis
 
