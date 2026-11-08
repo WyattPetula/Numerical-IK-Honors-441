@@ -29,22 +29,27 @@ I used the Unity Game Engine for this project. I chose Unity because I use it fo
 ## Cyclic Coordinate Descent
 https://github.com/user-attachments/assets/89317682-64c4-4b02-8c31-c0a2f38c6eb5
 
-Pseudocode:
+**Steps:**
 
-```
-For each joint in kinematic chain: // end-effector to base
+For each joint in the kinematic chain, moving from the end effector toward the base:
 
-  joint_effector_v = normalize(end_effector_pos - joint_pos)
-
-  joint_target_v = normalize(target_pos - joint_pos)
-
-  correction_angle = Angle(joint_effector_v, joint_target_v, revolute_axis) // [-180, 180]
-
-  joint.AddAngle(correction_angle)
-```
+1. Get the normalized vector from the joint to the end effector
+2. Get the normalized vector from the joint to the target
+3. Find the angle between the vectors
+4. Rotate the joint by that angle
 
 ## Jacobian Transpose
 https://github.com/user-attachments/assets/0af39a8f-e61d-49c1-8b62-5ab88edc9485
+
+**Steps:**
+
+$
+A = \begin{bmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9
+\end{bmatrix}
+$
 
 ## Jacobian Pseudoinverse
 https://github.com/user-attachments/assets/c29a9c8c-39de-436d-a199-b59f26d76db6
