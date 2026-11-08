@@ -103,7 +103,64 @@ j_{\theta} = j_{\theta} + \vec{\Delta\theta}_i
 ## Jacobian Pseudoinverse
 https://github.com/user-attachments/assets/c29a9c8c-39de-436d-a199-b59f26d76db6
 
-## (Jacobian) Dampened Least Squares
+**Steps:**
+
+1. Update the Jacobian
+```math
+J = \begin{bmatrix}
+\frac{\partial ee_{1x}}{\partial j\theta_1} & \frac{\partial ee_{1x}}{\partial j\theta_2} & ... & \frac{\partial ee_{1x}}{\partial j\theta_n} \\
+\frac{\partial ee_{1y}}{\partial j\theta_1} & \frac{\partial ee_{1y}}{\partial j\theta_2} & ... & \frac{\partial ee_{1y}}{\partial j\theta_n} \\
+\frac{\partial ee_{1z}}{\partial j\theta_1} & \frac{\partial ee_{1z}}{\partial j\theta_2} & ... & \frac{\partial ee_{1z}}{\partial j\theta_n} \\
+\frac{\partial ee_{2x}}{\partial j\theta_1} & \frac{\partial ee_{2x}}{\partial j\theta_2} & ... & \frac{\partial ee_{2x}}{\partial j\theta_n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial ee_{nz}}{\partial j\theta_1} & \frac{\partial ee_{nz}}{\partial j\theta_2} & ... & \frac{\partial ee_{nz}}{\partial j\theta_n} \\
+\end{bmatrix}
+```
+2. Update the end-effector position vector
+```math
+\textbf{s} = \begin{bmatrix}
+ee_{1x} \\
+ee_{1y} \\
+ee_{1z} \\
+ee_{2x} \\
+\vdots \\
+ee_{nz}
+\end{bmatrix}
+```
+
+3. Update the target position vector 
+```math
+\textbf{t} = \begin{bmatrix}
+t_{1x} \\
+t_{1y} \\
+t_{1z} \\
+t_{2x} \\
+\vdots \\
+t_{nz}
+\end{bmatrix}
+```
+
+4. Update the positional error vector
+```math
+\textbf{e} = \textbf{t} - \textbf{s}
+```
+
+5. Calculate the Moore-Penrose Pseudoinverse of the Jacobian
+```math
+J^{+} = V \Sigma^{+} U^\top
+```
+
+6. Recalculate the per-joint correction angles (alpha is constant)
+```math
+\vec{\Delta\theta} = \alpha J^{+} \textbf{e}
+```
+
+7. Apply the correction angles to each corresponding joint
+```math
+j_{\theta} = j_{\theta} + \vec{\Delta\theta}_i
+```
+
+## (Jacobian) Damped Least Squares
 https://github.com/user-attachments/assets/28c8d139-9640-43ef-9f1f-8fe9aa660d2a
 
 # Section 3 - How Each Method Works
