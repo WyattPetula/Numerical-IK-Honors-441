@@ -46,9 +46,31 @@ https://github.com/user-attachments/assets/0af39a8f-e61d-49c1-8b62-5ab88edc9485
 ```math
 J = \begin{bmatrix}
 \frac{\partial ee_{1x}}{\partial j_1\theta} & \frac{\partial ee_{1x}}{\partial j_2\theta} & ... & \frac{\partial ee_{1x}}{\partial j_n\theta} \\
+\frac{\partial ee_{1y}}{\partial j_1\theta} & \frac{\partial ee_{1y}}{\partial j_2\theta} & ... & \frac{\partial ee_{1y}}{\partial j_n\theta} \\
+\frac{\partial ee_{1z}}{\partial j_1\theta} & \frac{\partial ee_{1z}}{\partial j_2\theta} & ... & \frac{\partial ee_{1z}}{\partial j_n\theta} \\
 \frac{\partial ee_{2x}}{\partial j_1\theta} & \frac{\partial ee_{2x}}{\partial j_2\theta} & ... & \frac{\partial ee_{2x}}{\partial j_n\theta} \\
 \vdots & \vdots & \ddots & \vdots \\
-\frac{\partial ee_{nx}}{\partial j_1\theta} & \frac{\partial ee_{nx}}{\partial j_2\theta} & ... & \frac{\partial ee_{nx}}{\partial j_n\theta} \\
+\frac{\partial ee_{nz}}{\partial j_1\theta} & \frac{\partial ee_{nz}}{\partial j_2\theta} & ... & \frac{\partial ee_{nz}}{\partial j_n\theta} \\
+\end{bmatrix}
+
+\textbf{s} = \begin{bmatrix}
+ee_{1x} \\
+ee_{1y} \\
+ee_{1z} \\
+ee_{2x} \\
+\vdots \\
+ee_{nz}
+\end{bmatrix}
+```
+
+```math
+\textbf{s} = \begin{bmatrix}
+ee_{1x} \\
+ee_{1y} \\
+ee_{1z} \\
+ee_{2x} \\
+\vdots \\
+ee_{nz}
 \end{bmatrix}
 ```
 
