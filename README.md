@@ -29,6 +29,20 @@ I used the Unity Game Engine for this project. I chose Unity because I use it fo
 ## Cyclic Coordinate Descent
 https://github.com/user-attachments/assets/89317682-64c4-4b02-8c31-c0a2f38c6eb5
 
+Pseudocode:
+
+```
+For each joint in kinematic chain: // end-effector to base
+
+  joint_effector_v = normalize(end_effector_pos - joint_pos)
+
+  joint_target_v = normalize(target_pos - joint_pos)
+
+  correction_angle = Angle(joint_effector_v, joint_target_v, revolute_axis) // [-180, 180]
+
+  joint.AddAngle(correction_angle)
+```
+
 ## Jacobian Transpose
 https://github.com/user-attachments/assets/0af39a8f-e61d-49c1-8b62-5ab88edc9485
 
