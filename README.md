@@ -45,10 +45,10 @@ https://github.com/user-attachments/assets/0af39a8f-e61d-49c1-8b62-5ab88edc9485
 
 ```math
 J = \begin{bmatrix}
-\frac{\partial ee1_x}{\partial j1_angle} & \frac{\partial ee1_x}{\partial j2_angle} & ... & \frac{\partial ee1_x}{\partial jn_angle} \\
-\frac{\partial ee2_x}{\partial j1_angle} & \frac{\partial ee2_x}{\partial j2_angle} & ... & \frac{\partial ee2_x}{\partial jn_angle} \\
+\frac{\partial ee_{1x}}{\partial j_1\theta} & \frac{\partial ee_{1x}}{\partial j_2\theta} & ... & \frac{\partial ee_{1x}}{\partial j_n\theta} \\
+\frac{\partial ee_{2x}}{\partial j_1\theta} & \frac{\partial ee_{2x}}{\partial j_2\theta} & ... & \frac{\partial ee_{2x}}{\partial j_n\theta} \\
 \vdots & \vdots & \ddots & \vdots \\
-\frac{\partial een_x}{\partial j1_angle} & \frac{\partial een_x}{\partial j2_angle} & ... & \frac{\partial een_x}{\partial jn_angle} \\
+\frac{\partial ee_{nx}}{\partial j_1\theta} & \frac{\partial ee_{nx}}{\partial j_2\theta} & ... & \frac{\partial ee_{nx}}{\partial j_n\theta} \\
 \end{bmatrix}
 ```
 
