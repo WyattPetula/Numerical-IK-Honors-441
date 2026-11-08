@@ -43,13 +43,13 @@ https://github.com/user-attachments/assets/0af39a8f-e61d-49c1-8b62-5ab88edc9485
 
 **Steps:**
 
-$
+```math
 A = \begin{bmatrix}
 1 & 2 & 3 \\
 4 & 5 & 6 \\
 7 & 8 & 9
 \end{bmatrix}
-$
+```
 
 ## Jacobian Pseudoinverse
 https://github.com/user-attachments/assets/c29a9c8c-39de-436d-a199-b59f26d76db6
