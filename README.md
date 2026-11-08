@@ -48,12 +48,12 @@ For each step of the simulation:
 1. Update the Jacobian
 ```math
 J = \begin{bmatrix}
-\frac{\partial ee_{1x}}{\partial j_1\theta} & \frac{\partial ee_{1x}}{\partial j_2\theta} & ... & \frac{\partial ee_{1x}}{\partial j_n\theta} \\
-\frac{\partial ee_{1y}}{\partial j_1\theta} & \frac{\partial ee_{1y}}{\partial j_2\theta} & ... & \frac{\partial ee_{1y}}{\partial j_n\theta} \\
-\frac{\partial ee_{1z}}{\partial j_1\theta} & \frac{\partial ee_{1z}}{\partial j_2\theta} & ... & \frac{\partial ee_{1z}}{\partial j_n\theta} \\
-\frac{\partial ee_{2x}}{\partial j_1\theta} & \frac{\partial ee_{2x}}{\partial j_2\theta} & ... & \frac{\partial ee_{2x}}{\partial j_n\theta} \\
+\frac{\partial ee_{1x}}{\partial j\theta_1} & \frac{\partial ee_{1x}}{\partial j\theta_2} & ... & \frac{\partial ee_{1x}}{\partial j\theta_n} \\
+\frac{\partial ee_{1y}}{\partial j\theta_1} & \frac{\partial ee_{1y}}{\partial j\theta_2} & ... & \frac{\partial ee_{1y}}{\partial j\theta_n} \\
+\frac{\partial ee_{1z}}{\partial j\theta_1} & \frac{\partial ee_{1z}}{\partial j\theta_2} & ... & \frac{\partial ee_{1z}}{\partial j\theta_n} \\
+\frac{\partial ee_{2x}}{\partial j\theta_1} & \frac{\partial ee_{2x}}{\partial j\theta_2} & ... & \frac{\partial ee_{2x}}{\partial j\theta_n} \\
 \vdots & \vdots & \ddots & \vdots \\
-\frac{\partial ee_{nz}}{\partial j_1\theta} & \frac{\partial ee_{nz}}{\partial j_2\theta} & ... & \frac{\partial ee_{nz}}{\partial j_n\theta} \\
+\frac{\partial ee_{nz}}{\partial j\theta_1} & \frac{\partial ee_{nz}}{\partial j\theta_2} & ... & \frac{\partial ee_{nz}}{\partial j\theta_n} \\
 \end{bmatrix}
 ```
 2. Update the end-effector position vector
@@ -85,19 +85,19 @@ t_{nz}
 \textbf{e} = \textbf{t} - \textbf{s}
 ```
 
-5. Recalculate the step-scaling rate
+5. Recalculate the step-scaling rate (using dot product)
 ```math
 \alpha = \frac{\langle \textbf{e}, JJ^\top \textbf{e}\rangle}{\langle JJ^\top \textbf{e}, JJ^\top \textbf{e}\rangle}
 ```
 
 6. Recalculate the per-joint correction angles
 ```math
-\vec{\delta\theta} = \alpha J^\top \textbf{e}
+\vec{\Delta\theta} = \alpha J^\top \textbf{e}
 ```
 
 7. Apply the correction angles to each corresponding joint
 ```math
-j_{\theta} += \vec{\delta\theta}_i
+j_{\theta} = j_{\theta} + \vec{\Delta\theta}_i
 ```
 
 ## Jacobian Pseudoinverse
