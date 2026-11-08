@@ -31,7 +31,7 @@ https://github.com/user-attachments/assets/89317682-64c4-4b02-8c31-c0a2f38c6eb5
 
 **Steps:**
 
-For each joint in the kinematic chain, moving from the end effector toward the base:
+For each joint in the kinematic chain, from end effector to base:
 
 1. Get the normalized vector from the joint to the end effector
 2. Get the normalized vector from the joint to the target
@@ -43,6 +43,9 @@ https://github.com/user-attachments/assets/0af39a8f-e61d-49c1-8b62-5ab88edc9485
 
 **Steps:**
 
+For each step of the simulation:
+
+1. Update the Jacobian
 ```math
 J = \begin{bmatrix}
 \frac{\partial ee_{1x}}{\partial j_1\theta} & \frac{\partial ee_{1x}}{\partial j_2\theta} & ... & \frac{\partial ee_{1x}}{\partial j_n\theta} \\
@@ -52,7 +55,9 @@ J = \begin{bmatrix}
 \vdots & \vdots & \ddots & \vdots \\
 \frac{\partial ee_{nz}}{\partial j_1\theta} & \frac{\partial ee_{nz}}{\partial j_2\theta} & ... & \frac{\partial ee_{nz}}{\partial j_n\theta} \\
 \end{bmatrix}
-
+```
+2. Update the end-effector position vector
+```math
 \textbf{s} = \begin{bmatrix}
 ee_{1x} \\
 ee_{1y} \\
@@ -63,15 +68,36 @@ ee_{nz}
 \end{bmatrix}
 ```
 
+3. Update the target position vector 
 ```math
-\textbf{s} = \begin{bmatrix}
-ee_{1x} \\
-ee_{1y} \\
-ee_{1z} \\
-ee_{2x} \\
+\textbf{t} = \begin{bmatrix}
+t_{1x} \\
+t_{1y} \\
+t_{1z} \\
+t_{2x} \\
 \vdots \\
-ee_{nz}
+t_{nz}
 \end{bmatrix}
+```
+
+4. Update the positional error vector
+```math
+\textbf{e} = \textbf{t} - \textbf{s}
+```
+
+5. Recalculate the step-scaling rate
+```math
+\alpha = \frac{\langle \textbf{e}, JJ^\top \textbf{e}\rangle}{\langle JJ^\top \textbf{e}, JJ^\top \textbf{e}\rangle}
+```
+
+7. Recalculate the per-joint correction angles
+```math
+\textbf{\delta\theta} = \alpha J^\top \textbf{e}
+```
+
+8. Apply the correction angles
+```math
+\textbf{joints}_i.angle = \textbf{\delta\theta}_i
 ```
 
 ## Jacobian Pseudoinverse
