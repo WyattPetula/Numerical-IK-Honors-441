@@ -44,10 +44,11 @@ https://github.com/user-attachments/assets/0af39a8f-e61d-49c1-8b62-5ab88edc9485
 **Steps:**
 
 ```math
-A = \begin{bmatrix}
-1 & 2 & 3 \\
-4 & 5 & 6 \\
-7 & 8 & 9
+J = \begin{bmatrix}
+\frac{\partial ee1_x}{\partial j1_angle} & \frac{\partial ee1_x}{\partial j2_angle} & ... & \frac{\partial ee1_x}{\partial jn_angle} \\
+\frac{\partial ee2_x}{\partial j1_angle} & \frac{\partial ee2_x}{\partial j2_angle} & ... & \frac{\partial ee2_x}{\partial jn_angle} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial een_x}{\partial j1_angle} & \frac{\partial een_x}{\partial j2_angle} & ... & \frac{\partial een_x}{\partial jn_angle} \\
 \end{bmatrix}
 ```
 
