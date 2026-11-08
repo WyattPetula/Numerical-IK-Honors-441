@@ -90,14 +90,14 @@ t_{nz}
 \alpha = \frac{\langle \textbf{e}, JJ^\top \textbf{e}\rangle}{\langle JJ^\top \textbf{e}, JJ^\top \textbf{e}\rangle}
 ```
 
-7. Recalculate the per-joint correction angles
+6. Recalculate the per-joint correction angles
 ```math
-\textbf{\delta\theta} = \alpha J^\top \textbf{e}
+\vec{\delta\theta} = \alpha J^\top \textbf{e}
 ```
 
-8. Apply the correction angles
+7. Apply the correction angles to each corresponding joint
 ```math
-\textbf{joints}_i.angle = \textbf{\delta\theta}_i
+j_{\theta} += \vec{\delta\theta}_i
 ```
 
 ## Jacobian Pseudoinverse
