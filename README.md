@@ -244,9 +244,18 @@ j_{\theta} = j_{\theta} + \vec{\Delta\theta}_i
 
 # Section 3 - Theoretical Analysis
 
+**This section will investigate the theory behind each method. For example, why can we substitute the Jacobian Inverse with the Jacobian Transpose?** 
+
 # Section 4 - Comparative Analysis
 
+**This section will comparatively analyze each method's performance, visual behavior, and ideal applications. Some metrics may include:**
+1. Time to convergence (how long does a method take to reach a stable state?)
+2. Scalability (what is the time complexity of each method? How many joints does it take before FPS is noticeably impacted?)
+3. Robustness (how does the method respond near singularities? What are edge cases where the method may break down?) 
+
 # Section 5 - Conclusion
+
+**This section will summarize my findings and discuss which method(s) I would consider using for my Rain World-inspired game.**
 
 # License
 This project is licensed under Creative Commons Attribution (CC BY). You are free to copy and redistribute the material in any medium or format for any purpose. You are also free to remix, transform, and build upon the material for any purpose. However, you must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. Additionally, you may not apply legal terms or technological measures that legally restrict others from doing anything this license permits.
