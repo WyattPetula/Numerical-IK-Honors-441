@@ -262,3 +262,7 @@ This project is licensed under Creative Commons Attribution (CC BY). You are fre
 
 # Author
 Wyatt P. Petula
+
+# Disclosure
+
+I implemented all code myself using my knowledge of Unity. In addition to publicly available online resources, such as the papers I cited, I used ChatGPT to conceptualize and visualize ideas I did not fully understand. 
