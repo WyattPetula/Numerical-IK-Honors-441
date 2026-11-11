@@ -22,6 +22,30 @@ A common procedural animation technique is inverse kinematics, which calculates 
 2. Review literature to understand how and why these methods work
 3. Benchmark each method's performance and compare their visual behavior
 
+## Resources
+
+**Software:**
+1. Unity Game Engine 6000.3.10.f1
+2. VSCode
+
+**Papers** (to be cited appropriately in the final report):
+1. https://andreasaristidou.com/publications/papers/IK_survey.pdf
+2. https://www.cs.cmu.edu/~15464-s13/lectures/lecture6/iksurvey.pdf
+
+*Additional papers may be added as the project evolves.*
+
+## Installation
+
+Once I implement all methods, I will make the application (which I use to capture the video demos) easily available. For now, you can use the in-progress tool inside the Unity Game Engine Editor using the following steps:
+
+1. Download Unity Game Engine 6000.3.10.f1
+2. Download the Unity Hub
+3. Download the Numerical-IK-Honors-441 folder to your computer (e.g., C:/)
+4. Inside the Unity Hub, go to *Add -> Add Project from Disk*
+5. Select *Numerical-IK-Honors-441 folder*
+6. When the project loads, enter Scenes in the built-in file explorer and double-click whichever scene you find
+7. To run the application, click the ">" (play) button (top-middle of screen).
+
 # Section 2 - Implementation
 
 I used the Unity Game Engine for this project. I chose Unity because I use it for game development, and it supports MathNet.Numerics, an easy-to-use linear algebra library. Unity is written in C#.
