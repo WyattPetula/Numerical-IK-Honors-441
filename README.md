@@ -27,6 +27,7 @@ A common procedural animation technique is inverse kinematics, which calculates 
 **Software:**
 1. Unity Game Engine 6000.3.10.f1
 2. VSCode
+3. Windows Snipping Tool - Video Capture
 
 **Papers** (to be cited appropriately in the final report):
 1. https://andreasaristidou.com/publications/papers/IK_survey.pdf
