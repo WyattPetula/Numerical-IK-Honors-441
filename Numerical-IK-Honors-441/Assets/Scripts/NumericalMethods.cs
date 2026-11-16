@@ -3,23 +3,24 @@ using MathNet.Numerics.LinearAlgebra;
 using System.Collections.Generic;
 using MathNet.Numerics;
 using System;
+using System.Linq;
+using UnityEngine.Events;
 
-public class JacobianApproaches : MonoBehaviour
+public class NumericalMethods : MonoBehaviour
 {
-    public enum JacobianMethod
+    public enum NumericalMethod
     {
+        CyclicCoordinateDescent,
+        Inverse,
         Transpose,
         Pseudoinverse,
         DampenedLeastSquares
     }
 
-    public Transform target_t;
-    public Transform end_effector_t;
-
-    [SerializeField] private JacobianMethod jacobian_method;
-    [SerializeField] private List<GameObject> ee_objs; // Set in editor
-    [SerializeField] private List<GameObject> target_objs; // Set in editor
-    [SerializeField] private List<GameObject> joint_objs; // Set in editor
+    [SerializeField] private NumericalMethod numerical_method;
+    [SerializeField] private List<GameObject> ee_objs;
+    [SerializeField] private List<GameObject> target_objs;
+    [SerializeField] private List<GameObject> joint_objs;
     [SerializeField] private List<RevoluteJoint> joint_rjs;
     
     // Matrix builder shortcuts.
@@ -33,13 +34,30 @@ public class JacobianApproaches : MonoBehaviour
     private Vector<float> e; // Error between targets and end effectors
     private Vector<float> da; // Delta joint angles
 
+    public ArmAssembler arm_assembler_script;
+    private bool begin_updates;
+
     // Scalars
     private float alpha_tr;
+    private float alpha_in;
     [SerializeField] private float alpha_ps = 0.1f;
     [SerializeField] private float lambda = 0.1f;
-
-    void Start()
+    void Awake()
     {
+        begin_updates = false;
+        arm_assembler_script.joints_ready.AddListener(Setup);
+    }
+    void OnDestroy()
+    {
+        arm_assembler_script.joints_ready.RemoveListener(Setup);
+    }
+
+    void Setup()
+    {
+        joint_objs = GameObject.FindGameObjectsWithTag("Joint").ToList();
+        ee_objs = GameObject.FindGameObjectsWithTag("End-Effector").ToList();
+        target_objs = GameObject.FindGameObjectsWithTag("Target").ToList();
+
         // Sort the joints from deepest (closest to end effector) to shallowest (closest to base).
         joint_objs = Ext.SortByDepth(joint_objs);
 
@@ -59,29 +77,59 @@ public class JacobianApproaches : MonoBehaviour
         s = V.Dense(3 * ee_objs.Count);
         t = V.Dense(3 * ee_objs.Count);
         da = V.Dense(joint_objs.Count);
+
+        Debug.Log($"J: {J.RowCount} x {J.ColumnCount}");
+        begin_updates = true;
     }
 
     void FixedUpdate()
     {
-        UpdateVectors();
-        UpdateJacobian();
+        if (begin_updates)
+        {
+            UpdateVectors();
+            UpdateJacobian();
 
-        if(jacobian_method == JacobianMethod.Transpose)
-        {
-            CalculateAlpha();
-            UpdateDeltaAnglesTR();
+            if(numerical_method == NumericalMethod.CyclicCoordinateDescent)
+            {
+                PerformCCD();
+            }
+            else if(numerical_method == NumericalMethod.Inverse)
+            {
+                CalculateAlpha();
+                UpdateDeltaAnglesIN();
+                ApplyDeltaAngles();
+            }
+            else if(numerical_method == NumericalMethod.Transpose)
+            {
+                CalculateAlpha();
+                UpdateDeltaAnglesTR();
+                ApplyDeltaAngles();
+            }
+            else if(numerical_method == NumericalMethod.Pseudoinverse)
+            {
+                CalculateConugateTranspose();
+                UpdateDeltaAnglesPS();
+                ApplyDeltaAngles();
+            }
+            else
+            {
+                UpdateDeltaAnglesDLS();
+                ApplyDeltaAngles();
+            }
         }
-        else if(jacobian_method == JacobianMethod.Pseudoinverse)
-        {
-            CalculateConugateTranspose();
-            UpdateDeltaAnglesPS();
-        }
-        else
-        {
-            UpdateDeltaAnglesDLS();
-        }
+    }
 
-        ApplyDeltaAngles();
+    private void PerformCCD()
+    {
+        foreach(RevoluteJoint joint_rj in joint_rjs)
+        {
+            GameObject joint_obj = joint_rj.gameObject;
+            Vector3 joint_effector_v = (ee_objs[0].transform.position - joint_obj.transform.position).normalized;
+            Vector3 joint_target_v = (target_objs[0].transform.position - joint_obj.transform.position).normalized;
+
+            float z_angle = Vector3.SignedAngle(joint_effector_v, joint_target_v, joint_rj.localZAxis);
+            joint_rj.AddAngle(z_angle);
+        }
     }
 
     /// <summary>
@@ -144,9 +192,13 @@ public class JacobianApproaches : MonoBehaviour
         float denominator = JJTe.DotProduct(JJTe);
 
         if(denominator.AlmostEqual(0))
-            alpha_tr = 0;
+        {
+            alpha_tr = alpha_in = 0;
+        }
         else
-            alpha_tr = numerator / denominator;
+        {
+            alpha_tr = alpha_in = numerator / denominator;
+        }
     }
 
     private void ApplyDeltaAngles()
@@ -154,6 +206,21 @@ public class JacobianApproaches : MonoBehaviour
         for(int i = 0; i < joint_rjs.Count; i++)
         {
             joint_rjs[i].AddAngle(da[i] * Mathf.Rad2Deg);
+        }
+    }
+
+    // =============================================================================
+    // INVERSE
+    // =============================================================================
+    private void UpdateDeltaAnglesIN()
+    {
+        if(!J.Determinant().AlmostEqual(0))
+        {
+            da = alpha_in * J.Inverse() * e;
+        }
+        else
+        {
+            throw new Exception($"Jacobian is not invertible! Rank is {J.Rank()}, J = {J.ToString()}.");
         }
     }
 
