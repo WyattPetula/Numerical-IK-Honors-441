@@ -245,7 +245,31 @@ j_{\theta} = j_{\theta} + \vec{\Delta\theta}_i
 
 # Section 3 - Theoretical Analysis
 
-**This section will investigate the theory behind each method. For example, why can we substitute the Jacobian Inverse with the Jacobian Transpose?** 
+**This section will investigate the theory behind each method. For example, why can we substitute the Jacobian Inverse with the Jacobian Transpose?**
+
+I will use a two-jointed arm as a toy example for analyzing the methodology.
+
+## Jacobian Transpose
+
+```math
+\alpha J^\top \textbf{e} = \alpha
+\begin{bmatrix}
+\frac{\partial ee_{1x}}{\partial j\theta_1} & \frac{\partial ee_{1y}}{\partial j\theta_1} & \frac{\partial ee_{1z}}{\partial j\theta_1} \\
+\frac{\partial ee_{1x}}{\partial j\theta_2} & \frac{\partial ee_{1y}}{\partial j\theta_2} & \frac{\partial ee_{1z}}{\partial j\theta_2} \\
+\end{bmatrix}
+\begin{bmatrix}
+\text{error}_{1x} \\
+\text{error}_{1y} \\
+\text{error}_{1z} \\
+\end{bmatrix} =
+\begin{bmatrix}
+\frac{\partial ee_{1x}}{\partial j\theta_1}\text{error}_{1x} + \frac{\partial ee_{1y}}{\partial j\theta_1}\text{error}_{1y} + \frac{\partial ee_{1z}}{\partial j\theta_1}\text{error}_{1z} \\
+\frac{\partial ee_{1x}}{\partial j\theta_2}\text{error}_{1x} + \frac{\partial ee_{1y}}{\partial j\theta_2}\text{error}_{1y} + \frac{\partial ee_{1z}}{\partial j\theta_2}\text{error}_{1z} \\
+\end{bmatrix}
+```
+
+*This method takes the dot product between each joint's Jacobian vector and the end-effector-to-target vector.*
+<img width="1420" height="1042" alt="JTranspose_Diagram" src="https://github.com/user-attachments/assets/0867309f-5219-47a4-8551-fa12f49fc2ac" />
 
 # Section 4 - Comparative Analysis
 
